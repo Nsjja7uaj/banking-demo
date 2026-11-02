@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f2f3ed" />
+    <meta name="description" content="Privatbank cross-border transfer simulator. Demo records only; no real funds move." />
+    <title>Privatbank | Transfer desk</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Main navigation">
+        <a class="brand" href="#overview" aria-label="Privatbank home">
+          <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span>privat<span class="brand-light">bank</span></span>
+        </a>
+        <div class="workspace-label">WORKSPACE</div>
+        <nav class="nav-list">
+          <a class="nav-link active" href="#overview"><span class="nav-icon" aria-hidden="true">▦</span>Overview</a>
+          <a class="nav-link" href="#transfer"><span class="nav-icon" aria-hidden="true">↗</span>Transfer desk</a>
+          <a class="nav-link" href="#activity"><span class="nav-icon" aria-hidden="true">◷</span>Activity</a>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="sidebar-status"><span class="status-dot"></span><div><strong>Sandbox mode</strong><small>Live banking is disabled</small></div></div>
+          <div class="profile"><span class="avatar">PB</span><div><strong>Privatbank</strong><small>Demo workspace</small></div><span class="profile-more" aria-hidden="true">···</span></div>
+        </div>
+      </aside>
+
+      <main class="main-content" id="overview">
+        <header class="topbar">
+          <div class="breadcrumb">Workspace <span>/</span> Transfer desk</div>
+          <div class="topbar-right"><span class="environment-tag"><span></span>TEST ENVIRONMENT</span><button class="icon-button" type="button" aria-label="Notifications" title="No notifications in demo mode">♧<i></i></button></div>
+        </header>
+
+        <section class="page-heading">
+          <div><p class="eyebrow">INTERNATIONAL PAYMENTS <span>·</span> SANDBOX</p><h1>Transfer desk</h1><p class="heading-copy">Prepare and review cross-border payment scenarios.</p></div>
+          <div class="date-chip"><span class="calendar-icon" aria-hidden="true">▦</span><span id="today">Today</span></div>
+        </section>
+
+        <section class="notice-banner" aria-label="Sandbox notice">
+          <span class="notice-icon" aria-hidden="true">i</span>
+          <div><strong>Simulation only. No money moves.</strong><p>Entries stay in this temporary demo. No bank account is connected, recipients are not notified, and no balance is credited or withdrawable.</p></div>
+          <span class="notice-tag">SANDBOX</span>
+        </section>
+
+        <section class="metrics" aria-label="Demo activity summary">
+          <article class="metric"><div class="metric-label">SIMULATIONS CREATED <span aria-hidden="true">↗</span></div><div class="metric-value" id="simulation-count">0</div><div class="metric-foot"><span class="metric-dot green"></span>Temporary session records</div></article>
+          <article class="metric"><div class="metric-label">TOTAL SCENARIO VALUE <span aria-hidden="true">◎</span></div><div class="metric-value" id="total-value">$0.00</div><div class="metric-foot">Demo amounts only <span class="metric-separator">·</span> not a bank balance</div></article>
+          <article class="metric status-metric"><div class="metric-label">TRANSFER STATUS <span aria-hidden="true">◷</span></div><div class="status-value"><span class="status-pill">Not sent</span></div><div class="metric-foot">No recipient alert is generated</div></article>
+        </section>
+
+        <div class="content-grid">
+          <section class="panel transfer-panel" id="transfer">
+            <div class="panel-heading"><div><p class="eyebrow">NEW SCENARIO</p><h2>Set up a transfer</h2></div><span class="step-badge">01 <span>/ 01</span></span></div>
+            <form id="transfer-form">
+              <div class="form-section-title"><span class="section-number">01</span><span>RECIPIENT DETAILS</span></div>
+              <label class="field-label" for="beneficiary">Beneficiary label <span>TEST DATA ONLY</span></label>
+              <input id="beneficiary" name="beneficiary" type="text" maxlength="80" placeholder="e.g. Sample recipient" autocomplete="off" required />
+              <p class="field-hint">Use a made-up name. Do not enter real personal or bank details.</p>
+              <div class="field-row">
+                <div class="field-group"><label class="field-label" for="country">Destination country</label><select id="country" name="country" required><option value="" disabled selected>Select country</option><option>Australia</option><option>Brazil</option><option>Canada</option><option>France</option><option>Germany</option><option>India</option><option>Japan</option><option>Nigeria</option><option>United Kingdom</option><option>United States</option></select></div>
+                <div class="field-group"><label class="field-label" for="currency">Currency</label><select id="currency" name="currency"><option value="USD">USD · US Dollar</option><option value="EUR">EUR · Euro</option><option value="GBP">GBP · Pound</option><option value="CAD">CAD · Canadian Dollar</option><option value="AUD">AUD · Australian Dollar</option><option value="INR">INR · Indian Rupee</option><option value="JPY">JPY · Japanese Yen</option><option value="NGN">NGN · Nigerian Naira</option><option value="BRL">BRL · Brazilian Real</option></select></div>
+              </div>
+              <div class="form-section-title amount-title"><span class="section-number">02</span><span>TRANSFER AMOUNT</span></div>
+              <label class="field-label" for="amount">Amount to simulate</label>
+              <div class="amount-input"><span id="currency-symbol">$</span><input id="amount" name="amount" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="0.00" required /><span class="currency-code" id="currency-code">USD</span></div>
+              <p class="field-hint">Any positive amount. This does not reserve or move funds.</p>
+              <div class="estimate-row"><span>Estimated delivery</span><span>Not applicable <span class="estimate-info" title="This simulator does not send payments.">i</span></span></div>
+              <button class="submit-button" type="submit"><span>Record simulation</span><span aria-hidden="true">↗</span></button>
+              <p class="form-footnote"><span aria-hidden="true">⌑</span> No funds will be sent or made available.</p>
+              <div class="form-message" id="form-message" role="status" aria-live="polite"></div>
+            </form>
+          </section>
+
+          <section class="panel activity-panel" id="activity">
+            <div class="panel-heading activity-heading"><div><p class="eyebrow">SESSION LOG</p><h2>Recent simulations</h2></div><span class="activity-count" id="activity-count">0 records</span></div>
+            <div class="table-wrap"><table><thead><tr><th>BENEFICIARY</th><th>AMOUNT</th><th>STATUS</th></tr></thead><tbody id="simulation-list"><tr class="empty-row"><td colspan="3"><div class="empty-state"><span class="empty-icon" aria-hidden="true">↗</span><strong>No simulations yet</strong><span>Your demo records will appear here.</span></div></td></tr></tbody></table></div>
+            <div class="activity-footer"><span class="footer-dot"></span>Data clears when the server restarts <span class="footer-info" title="Records are kept only in server memory for this demo.">i</span></div>
+          </section>
+        </div>
+        <footer class="page-footer"><span>PRIVATBANK <span>·</span> DEMO WORKSPACE</span><span>Not a bank. Not a payment service. No real transfers.</span></footer>
+      </main>
+    </div>
+  </body>
+</html>
